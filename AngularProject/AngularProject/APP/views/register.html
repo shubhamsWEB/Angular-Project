@@ -1,0 +1,48 @@
+﻿<div class="wrapper" style="background:linear-gradient(to top, #00ff99 0%, #00cc00 100%);">
+    <ul class="bg-bubbles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+
+    <div class="container align-middle box">
+        <h1 style="font-family: 'Fugaz One', cursive;color: #fff; text-shadow: 2px 2px #000099;">SIGN<span style="color: #00ffff;">UP</span></h1>
+        <form name="myForm" novalidate>
+            <p>
+                <strong>Email</strong><br>
+                <input type="email" name="email" ng-model="email" required><br />
+                <!--ERROR TO BE SHOWN IF THE EMAIL IN NOT VALID-->
+                <span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+                    <span ng-show="myForm.email.$error.required"><strong>(Email is required.)</strong></span>
+                    <span ng-show="myForm.email.$error.email"><strong>(Invalid email address.)</strong></span>
+                </span>
+            </p>
+            <p>
+                <strong>Password</strong> <br />
+                <input type="password" id="pass" name="pass" ng-model="pass" ng-minlength="6" required /><br />
+                <!--ERROR TO BE SHOWN IF THE PASSWORD LENGTH IS LESS THEN 6-->
+                <span style="color:yellow" ng-show="myForm.pass.$dirty || myForm.pass.$invalid">
+                    <span ng-if="!myForm.pass.$valid"><strong>(&#x1F6C8; Minimun 6 characters)</strong></span>
+                </span>
+            </p>
+            <p>
+                <strong>Confirm Password</strong> <br />
+                <input type="password" id="cpass" name="cpass" ng-model="cpass" ng-change="checkpassword()" /><br />
+                <!--ERROR IF PASSWORDS DOES NOT MATCH ("check" is defined in "registerController")-->
+                <span>{{check}}</span>
+            </p>
+            <p>
+                <button class="btn btn-primary" type="submit" ng-click="register()" ng-disabled="myForm.email.$dirty && myForm.email.$invalid || myForm.pass.$invalid">Signup</button>
+                <button class="btn btn-primary" ng-click="login()">Login</button>
+            </p>
+        </form>
+    </div>
+</div>

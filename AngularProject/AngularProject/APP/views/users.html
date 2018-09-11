@@ -1,0 +1,98 @@
+﻿<!--NAV BAR-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#!/dashboard">AngularJs</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <strong><a class="nav-link" href="#!dashboard">Home</a></strong>
+            </li>
+            <li class="nav-item">
+                <strong><a class="nav-link" href="#!/users">User List</a></strong>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <button class="btn btn-outline-danger my-2 my-sm-0" ng-click="logout()" type="submit">LOGOUT</button>
+        </form>
+    </div>
+</nav>
+<!--USER TABLE-->
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Avatar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="x in datas.data">
+                <td style="color:#000;">{{x.id}}</td>
+                <td>{{x.first_name}}</td>
+                <td>{{x.last_name}}</td>
+                <td>{{x.avatar}}<i ng-click="edit(x.id)" id="edit" style="float:right; margin-left:10px;" class="far fa-edit"></i><i ng-click="delete(x.id)" id="delete" style="float:right;" class="fas fa-trash"></i></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Button trigger modal -->
+    <center>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Add New User
+        </button>
+    </center>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">User Detailes</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form name="adduser" novalidate>
+                        <!--NAME INPUT-->
+                    <p>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">NAME</span>
+                            </div>
+                            <input type="text" name="name" ng-model="name" ng-minlength="4" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                            <!--ERROR TO BE DISPLAYED WHEN LENGTH IS LESS THAN 4-->
+                            <span style="color:red" ng-show="adduser.name.$dirty && adduser.name.$invalid">
+                                <span ng-if="!adduser.name.$valid"><strong>(&#x1F6C8; Minimun 4 characters)</strong></span>
+                            </span>
+                        </div>
+                    </p>
+                        <!--JOB INPUT-->
+                    <p>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">JOB</span>
+                            </div>
+                            <input type="text" name="job" ng-model="job" ng-minlength="2" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                            <!--ERROR TO BE DISPLAYED WHEN LENGTH IS LESS THAN 2-->
+                            <span style="color:red" ng-show="adduser.job.$dirty && adduser.job.$invalid">
+                                <span ng-if="!adduser.job.$valid"><strong>(&#x1F6C8; Minimun 2 characters)</strong></span>
+                            </span>
+                        </div>
+                    </p>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button ng-click="action()" type="button" class="btn btn-primary" ng-disabled="adduser.name.$dirty && adduser.name.$invalid || adduser.job.$invalid ">ADD USER</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
